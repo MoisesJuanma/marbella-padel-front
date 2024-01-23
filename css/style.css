@@ -1,0 +1,185 @@
+/* Estilos para el contenedor principal */
+.background-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+  }
+  
+  /* Estilos para cada imagen */
+  .image {
+    mix-blend-mode: difference; /* Mezcla de modos para mejorar el contraste */
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    filter: grayscale(100%); /* Convierte la imagen a blanco y negro */
+  }
+  
+  .image1 {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../images/playa.jpg') center/cover no-repeat;
+  }
+  
+  .image2 {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../images/raqueta.jpg') center/cover no-repeat;
+  }
+  
+  .image3 {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../images/linea.jpg') center/cover no-repeat;
+  }
+  
+  .image4 {
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../images/mar.jpg') center/cover no-repeat;
+  }
+  
+
+/* Estilos para el contenedor del título */
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: inline-block; /* Permite ajustar el tamaño al contenido */
+    max-height: 100%;
+    max-width: 100%;
+}
+
+/* Estilos para el título */
+h1 {
+    font-family: 'Roboto', sans-serif; /* Ejemplo de fuente tipográfica */
+    font-weight: bold;
+    font-size: 48px;
+    text-align: center;
+    color: #dddddd;
+    overflow: hidden; /* Recorta el texto que excede el ancho del contenedor */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto se recorta */
+    /* Otros estilos según tus preferencias */
+}
+
+
+/* Estilos para la barra de navegación */
+.navbar {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+}
+
+/* Estilos para el botón del menú */
+.menu-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+/* Estilos para el icono del menú (las tres rayas) */
+.menu-icon {
+    width: 30px;
+    height: 3px;
+    background-color: black;
+    margin: 5px 0;
+    position: relative;
+}
+
+.menu-icon-top {
+    width: 30px;
+    height: 3px;
+    top: -2px;
+    background-color: black;
+    margin: 5px 0;
+    position: relative;
+    transition: transform 0.5s ease; /* Transición para la transformación */
+}
+
+.menu-icon-bottom {
+    width: 30px;
+    height: 3px;
+    bottom: -2px;
+    background-color: black;
+    margin: 5px 0;
+    position: relative;
+    transition: transform 0.5s ease; /* Transición para la transformación */
+}
+
+.menu-icon-top.close {
+    transform: rotate(45deg); /* Giramos la barra superior */
+    top: 8px;
+}
+
+.menu-icon-bottom.close {
+    transform: rotate(-45deg); /* Giramos la barra inferior */
+    bottom: 8px;
+}
+
+
+/* Estilos para el menú desplegable */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #dddddd;
+    min-width: 120px;
+    /* Otros estilos según tus preferencias */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: black;
+    font-family: 'Roboto', sans-serif; /* Ejemplo de fuente tipográfica */
+    font-size: 24px; /* Tamaño de fuente más pequeño */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Estilos de la pagina 2 */
+
+/* Estilos para el select personalizado */
+.custom-select {
+    position: relative;
+    width: 200px;
+    font-size: 16px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.custom-select select {
+    appearance: none;
+    background: transparent;
+    width: calc(100% + 25px); /* Ajusta el ancho para incluir el espacio del ícono */
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Estilizar el ícono de la flecha */
+.custom-select::after {
+    content: '\25BE'; /* Código Unicode para una flecha hacia abajo */
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: transform 0.3s ease; /* Agregamos una transición suave */
+    font-size: 25px; /* Ajusta el tamaño de la flecha */
+}
+
+/* Rotar la flecha hacia arriba cuando el select está desplegado */
+.custom-select.open::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Estilo específico para el h1 con ID "titulo-semana" */
+#titulo-semana {
+    color: #000000; /* Cambiar el color del texto a negro */
+}

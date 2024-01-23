@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados SNP</title>
+    <link rel="stylesheet" href="../css/style.css"> <!-- Agrega la referencia al archivo CSS -->
+</head>
+<body>
+    <h1 id="titulo-semana">Resultados SNP - Semana 1</h1>
+    <div class="custom-select">
+        <select id="seleccion-semana">
+            <!-- Opciones para cada semana -->
+            <!-- Aquí puedes generar dinámicamente las opciones con JavaScript si obtienes la lista de semanas desde tu servicio REST -->
+            <option value="1">Semana 1</option>
+            <option value="2">Semana 2</option>
+            <!-- Otras opciones de semanas -->
+        </select>
+    </div>
+    <!-- Contenedor para los resultados -->
+    <div id="resultados-container">
+        <!-- Los resultados se llenarán aquí -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const resultadosContainer = document.getElementById('resultados-container');
+            const tituloSemana = document.getElementById('titulo-semana');
+            const seleccionSemana = document.getElementById('seleccion-semana'); // Obtener el elemento select
+            const customSelect = document.querySelector('.custom-select');
+            const select = customSelect.querySelector('select');
+
+            select.addEventListener('click', function() {
+                customSelect.classList.toggle('open');
+            });
+
+            // Función para actualizar los resultados de una semana específica
+            function mostrarResultadosSemana(semana) {
+                tituloSemana.textContent = `Resultados SNP - Semana ${semana.numero}`;
+                const resultadosContainer = document.getElementById('resultados-container');
+                resultadosContainer.innerHTML = ''; // Limpiar contenido anterior (si lo hubiera)
+
+                // Crear dinámicamente las opciones del select
+                seleccionSemana.addEventListener('change', () => {
+                    const semanaSeleccionada = parseInt(seleccionSemana.value); // Obtener el valor seleccionado del select como un número entero
+                    const semanaData = data.find(semana => semana.numero === semanaSeleccionada);
+                    mostrarResultadosSemana(semanaData);
+                });
+
+                const semanaDiv = document.createElement('div');
+                semanaDiv.classList.add('semana');
+
+                const h2 = document.createElement('h2');
+                h2.textContent = `Semana ${semana.numero} - ${semana.fechaInicio} - ${semana.fechaFin}`;
+                semanaDiv.appendChild(h2);
+
+                const partidosDiv = document.createElement('div');
+                partidosDiv.classList.add('partidos');
+
+                semana.resultados.forEach(resultado => {
+                    const partidoDiv = document.createElement('div');
+                    partidoDiv.classList.add('partido');
+                    partidoDiv.innerHTML = `
+                        <p>${resultado.nombreJugadores} ${resultado.sets}</p>
+                        <p class="fecha">${resultado.dia}</p>
+                    `;
+                    partidosDiv.appendChild(partidoDiv);
+                });
+
+                semanaDiv.appendChild(partidosDiv);
+                resultadosContainer.appendChild(semanaDiv);
+            }
+
+            // Realizar solicitud GET al servicio REST (por defecto, semana 1)
+            fetch('URL_DEL_SERVICIO_REST')
+                .then(response => response.json())
+                .then(data => {
+                    // Mostrar los resultados de la semana por defecto (semana 1)
+                    mostrarResultadosSemana(data[0]); // Por ejemplo, asumiendo que la primera semana es la semana 1
+
+                    // Crear dinámicamente las opciones del select
+                    data.forEach(semana => {
+                        const opcion = document.createElement('option');
+                        opcion.value = semana.numero;
+                        opcion.textContent = `Semana ${semana.numero}`;
+                        seleccionSemana.appendChild(opcion);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al obtener resultados:', error);
+                });
+
+            // Ejemplo de cómo cambiar a otra semana (puedes usar eventos de botones o interacciones del usuario)
+            // Para cambiar a otra semana, llama a mostrarResultadosSemana() con los datos correspondientes a la semana seleccionada
+            // mostrarResultadosSemana(datosDeOtraSemana);
+        });
+    </script>
+</body>
+</html>
+
